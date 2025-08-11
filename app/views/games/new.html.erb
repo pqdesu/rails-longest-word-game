@@ -1,0 +1,28 @@
+<h1 class="text-center pb-4">NEW GAME</h1>
+<div class="d-flex flex-wrap justify-content-center">
+  <% @letters.each do |letter| %>
+  <div class="ratio ratio-1x1 border border-dark m-2 d-flex align-items-center justify-content-center" style="width: 60px;"><%= letter %></div>
+  <% end %>
+</div>
+
+<form action="/score" method="post" data-turbo="false">
+  <div class="d-flex justify-content-center mt-5">
+    <input
+      type="text"
+      name="word"
+      class="form-control w-50"
+      placeholder="What's your word?"
+    >
+    <input
+      type="hidden"
+      name="letters"
+      value= <%= @letters.join('') %>
+      >
+    <input
+      type="submit"
+      value="Send it!"
+      class="btn btn-info ms-2"
+    >
+  </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+</form>
